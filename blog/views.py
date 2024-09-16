@@ -8,10 +8,11 @@ from django.shortcuts import render
 
 def home(request):
     return render(request, 'blog/pages/home.html', context={
-        'name': 'Michael Tavares'
+        'name': 'Banco de Conhecimento'
     })
+
 
 def blog(request, id):
     return render(request, 'blog/pages/post_view.html', context={
-        'name': 'Michael Tavares'
+        'name': 'Banco de Conhecimento'
     })

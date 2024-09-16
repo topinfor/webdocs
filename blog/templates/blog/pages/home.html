@@ -1,10 +1,5 @@
-{% include 'blog\partials\head.html' %}
-
-<body>
-    {% include 'blog\partials\header.html' %}
-    {% include 'blog\partials\search.html' %}
-
-    <main class="main-content-container">
+{% extends 'global/base.html' %}
+    {% block content %}
         <div class="main-content main-content-list container">
             {% include 'blog\partials\post_blog.html'%}
             {% include 'blog\partials\post_blog.html'%}
@@ -14,9 +9,4 @@
             {% include 'blog\partials\post_blog.html'%}
             {% include 'blog\partials\post_blog.html'%}
         </div>
-        
-
-    </main>
-    {% include 'blog\partials\footer.html' %}
-</body>
-</html>
+    {% endblock content %}

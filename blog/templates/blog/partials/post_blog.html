@@ -1,51 +1,67 @@
 {% load static %}
+
 <div class="banco  banco-list-item">
     <div class="banco-cover">
-        <img src="{% static 'blog/img/claro.png' %}" alt="My image">
+        <a href="{{ blog.get_absolute_url }}">
+            <img src="{{ blog.cover.url }}" alt="My image">
+        </a>
     </div>
     <div class="blog-title-container">
-        <h2 class="blog-title">Lorem ipsum dolor sit amet.</h2>
+        <h2 class="blog-title"> {{ blog.title }} </h2>
     </div>
     <div class="blog-author">
         <span class="blog-author-item">
             <i class="fas fa-user"></i>
-            Michael Tavares
+            {{ blog.author.first_name }} {{ blog.author.last_name }}
         </span>
         <span class="blog-author-item">
             <i class="fas fas fa-calendar-alt"></i>
-            13/09/2024 ás 08:10
+            {{ blog.created_at|date:"d/m/Y" }}  as {{ blog.created_at|date:"H:i" }}
         </span>
         <span class="blog-author-item">
             <a href="/blog/category/noc/">
                 <i class="fas fa-layer-group"></i>
-                <span>Noc</span>
+                <span>{{ blog.category.name }}</span>
             </a>
         </span>
     </div>
 
     <div class="blog-content">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur nisi commodi saepe nemo. Quod
-            delectus expedita excepturi nihil accusantium eum officia, rerum molestias sequi voluptates fuga
-            dolor atque laudantium veniam?</p>
+        <p>{{ blog.description }}</p>
     </div>
+
+    {% if is_detail_page is True %}
+
+        <div class="text-content">
+            {{ blog.post_content|linebreaksbr }}
+        </div>
+
+    {% endif %}
+
+
     <div class="blog-meta-container">
         <div class="blog-meta blog-tag">
             <h3 class="blog-meta-title"><i class="fas fa-tag"></i>Tag</h3>
             <div class="blog-meta-text">
-                Lorem, ipsum dolor.
+                {{ blog.post_tag }}
             </div>
         </div>
         <div class="blog-meta blog-sector">
             <h3 class="blog-meta-title"><i class="fas fa-industry"></i>Setor</h3>
             <div class="blog-meta-text">
-                Lorem, ipsum dolor.
+                {{ blog.post_sector }}
             </div>
         </div>
     </div>
+
+    {% if is_detail_page is not True %}
     <footer class="blog-banco-footer">
-        <a href="" class="blog-read-more">
+        <a href="posts/{{ blog.post_number }}/" class="blog-read-more">
             <i class="fa fa-eye"></i>
             <span>leia mais...</span>
         </a>
     </footer>
+    {% endif %}
+
+
 </div>

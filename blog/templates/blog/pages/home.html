@@ -1,13 +1,14 @@
 {% extends 'global/base.html' %}
-{% block title %} POST {% endblock title %}
+
+{% block title %}HOME |{% endblock title %}
+
     {% block content %}
+
         <div class="main-content main-content-list container">
-            {% include 'blog\partials\post_blog.html'%}
-            {% include 'blog\partials\post_blog.html'%}
-            {% include 'blog\partials\post_blog.html'%}
-            {% include 'blog\partials\post_blog.html'%}
-            {% include 'blog\partials\post_blog.html'%}
-            {% include 'blog\partials\post_blog.html'%}
-            {% include 'blog\partials\post_blog.html'%}
+            {% for blog in blogs %}
+            {% include 'blog\partials\post_blog.html' %}
+            {% endfor %}
+
         </div>
+        
     {% endblock content %}

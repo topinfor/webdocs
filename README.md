@@ -2,7 +2,7 @@
 
 Pacotes instalados.
                        
-asgiref==3.8.1
+asgiref==3.8.1 /n
 autopep8==2.3.1
 colorama==0.4.6
 Django==5.1

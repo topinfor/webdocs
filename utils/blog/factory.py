@@ -11,7 +11,7 @@ def rand_radio():
 
 def make_post():
     return {
-        'post_number': randint (100, 900),
+        'post_number': fake.random_number(digits=2, fix_len=True),
         'title': fake.sentence(nb_words=4),
         'description': fake.sentence(nb_words=40),
         'post_tag': fake.sentence(nb_words=2),

@@ -3,7 +3,7 @@
     <div class="main-container-logo">
 
         <img class="logo_image_claro" src="{% static 'blog/img/claro.png' %}" alt="Claro Logo">
-        <a class="main-logo" href="/">
+        <a class="main-logo" href="{% url 'blogs:home' %}">
             <i class="fa-brands fa-docker main-logo-icon"></i>
             <span class="main-logo-text">Banco de Conhecimento</span>
         </a>

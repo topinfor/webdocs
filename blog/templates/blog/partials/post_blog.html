@@ -2,12 +2,16 @@
 
 <div class="banco  banco-list-item">
     <div class="banco-cover">
-        <a href="{{ blog.get_absolute_url }}">
+        <a href="{% url 'blogs:blog' blog.post_number %}">
             <img src="{{ blog.cover.url }}" alt="My image">
         </a>
     </div>
     <div class="blog-title-container">
-        <h2 class="blog-title"> {{ blog.title }} </h2>
+        <h2 class="blog-title">
+            <a href="{% url 'blogs:blog' blog.post_number %}"> 
+                {{ blog.title }} 
+            </a>
+        </h2>
     </div>
     <div class="blog-author">
         <span class="blog-author-item">
@@ -56,7 +60,7 @@
 
     {% if is_detail_page is not True %}
     <footer class="blog-banco-footer">
-        <a href="posts/{{ blog.post_number }}/" class="blog-read-more">
+        <a href="{% url 'blogs:blog' blog.post_number %}" class="blog-read-more">
             <i class="fa fa-eye"></i>
             <span>leia mais...</span>
         </a>

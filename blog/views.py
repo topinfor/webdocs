@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from utils.blog.factory import make_post
 
 # Create your views here.

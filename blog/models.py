@@ -24,14 +24,16 @@ class Blog(models.Model):
     content_is_html = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    cover = models.ImageField(upload_to='blog/covers/%Y/%m/%d')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    cover = models.ImageField(upload_to='blog/covers/%Y/%m/%d', blank=True, default='')
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, default=None)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     sector = models.ForeignKey(Sector, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        if not self.author and 'user' in kwargs:
+            self.author = kwargs.pop('user')
         super().save(*args, **kwargs)
 
     def __str__(self):

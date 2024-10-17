@@ -2,32 +2,53 @@
 
 <div class="banco  banco-list-item">
     <div class="banco-cover">
-        <a href="{% url 'blogs:blog' blog.post_number %}">
+        <a href="{% url 'blogs:blog' blog.id %}">
+
+        {% if blog.cover %}
+
             <img src="{{ blog.cover.url }}" alt="My image">
+        
+        {% else %}
+        
+            <img src="{% static 'blog/img/claro.png' %}" alt="My image">
+        
+        {% endif %}
+
         </a>
     </div>
     <div class="blog-title-container">
         <h2 class="blog-title">
-            <a href="{% url 'blogs:blog' blog.post_number %}"> 
+            <a href="{% url 'blogs:blog' blog.id %}"> 
                 {{ blog.title }} 
             </a>
         </h2>
     </div>
     <div class="blog-author">
-        <span class="blog-author-item">
-            <i class="fas fa-user"></i>
-            {{ blog.author.first_name }} {{ blog.author.last_name }}
-        </span>
+        {% if blog.author is not None %}
+            <span class="blog-author-item">
+                <i class="fas fa-user"></i>
+                {% if blog.author.first_name %}
+                    {{ blog.author.first_name }} {{ blog.author.last_name }}
+                {% else %}
+                    {{ blog.author.username }}
+                {% endif %}
+            </span>
+        {% endif %}
+
         <span class="blog-author-item">
             <i class="fas fas fa-calendar-alt"></i>
             {{ blog.created_at|date:"d/m/Y" }}  as {{ blog.created_at|date:"H:i" }}
         </span>
-        <span class="blog-author-item">
-            <a href="/blog/category/noc/">
-                <i class="fas fa-layer-group"></i>
-                <span>{{ blog.category.name }}</span>
-            </a>
-        </span>
+        
+        {% if blog.category is not None %}
+            <span class="blog-author-item">
+                <a href="{% url 'blogs:category' blog.category.id %}">
+                    <i class="fas fa-layer-group"></i>
+                    <span>{{ blog.category.name }}</span>
+                </a>
+            </span>
+        {% endif %}
+            
     </div>
 
     <div class="blog-content">
@@ -37,30 +58,35 @@
     {% if is_detail_page is True %}
 
         <div class="text-content">
-            {{ blog.post_content|linebreaksbr }}
+            
+            {% if  blog.content_is_html is True %}
+                {{ blog.content|safe }}
+            {% else %}
+                {{ blog.content|linebreaksbr }}
+            {% endif %}
+     
         </div>
 
     {% endif %}
-
 
     <div class="blog-meta-container">
         <div class="blog-meta blog-tag">
             <h3 class="blog-meta-title"><i class="fas fa-tag"></i>Tag</h3>
             <div class="blog-meta-text">
-                {{ blog.post_tag }}
+                {{ blog.tags }}
             </div>
         </div>
         <div class="blog-meta blog-sector">
             <h3 class="blog-meta-title"><i class="fas fa-industry"></i>Setor</h3>
             <div class="blog-meta-text">
-                {{ blog.post_sector }}
+                {{ blog.sector }}
             </div>
         </div>
     </div>
 
     {% if is_detail_page is not True %}
     <footer class="blog-banco-footer">
-        <a href="{% url 'blogs:blog' blog.post_number %}" class="blog-read-more">
+        <a href="{% url 'blogs:blog' blog.id %}" class="blog-read-more">
             <i class="fa fa-eye"></i>
             <span>leia mais...</span>
         </a>

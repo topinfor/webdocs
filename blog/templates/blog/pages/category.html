@@ -6,12 +6,9 @@
 
         <div class="main-content main-content-list container">
             {% for blog in blogs %}
-                {% include 'blog\partials\post_blog.html' %}
-            {% empty %}
-                <div class="center m-y">
-                    <H1>Não existe conteúdo para exibir!</H1>
-                </div>
+            {% include 'blog\partials\post_blog.html' %}
             {% endfor %}
+
         </div>
         
     {% endblock content %}
